@@ -57,6 +57,12 @@ resource "aws_instance" "cs2_server" {
   # Associate the security group with the instance
   security_groups = [aws_security_group.cs2_server_sg.name]
 
+  # Define a root block device with 50GB storage
+  root_block_device {
+    volume_size = 50
+    volume_type = "gp2"
+  }
+
   # Use cloud-init for initialization
   user_data = data.template_file.cloud_init.rendered
 }
